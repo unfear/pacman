@@ -12,6 +12,8 @@ class Pacman:
     pacmanDirection = key.RIGHT
 
     def __init__(self, winW, winH):
+        self.winW = winW
+        self.winH = winH
         self.anim_pacman = {}
         self.anim_pacman_current = {}
         self.anim_pacman["right"] = pyglet.sprite.Sprite(pyglet.image.load_animation(os.path.join(SCRIPT_PATH, "pacman_right.gif")))
@@ -20,7 +22,7 @@ class Pacman:
         self.anim_pacman["down"] = pyglet.sprite.Sprite(pyglet.image.load_animation(os.path.join(SCRIPT_PATH, "pacman_down.gif")))
         self.anim_pacman_current = self.anim_pacman["right"]
         self.anim_pacman_current.x = (winW - self.anim_pacman_current.width) / 2
-        self.anim_pacman_current.y = (winH - self.anim_pacman_current.height) / 2
+        self.anim_pacman_current.y = 200 #(winH - self.anim_pacman_current.height) / 2
 
     def draw(self):
         self.anim_pacman_current.draw()
@@ -47,11 +49,11 @@ class Pacman:
         self.anim_pacman_current.x = prev_x
         self.anim_pacman_current.y = prev_y
 
-        if prev_x >= 496-self.anim_pacman_current.width:
+        if prev_x >= self.winW-self.anim_pacman_current.width:
             self.move(key.LEFT)
         if prev_x <= 0:
             self.move(key.RIGHT)
-        if prev_y >= 290-self.anim_pacman_current.height:
+        if prev_y >= self.winH-self.anim_pacman_current.height:
             self.move(key.DOWN)
         if prev_y <= 0:
             self.move(key.UP)
