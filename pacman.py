@@ -23,9 +23,57 @@ class Pacman:
         self.anim_pacman_current = self.anim_pacman["right"]
         self.anim_pacman_current.x = (winW - self.anim_pacman_current.width) / 2
         self.anim_pacman_current.y = 200 #(winH - self.anim_pacman_current.height) / 2
+        self.dataArray = []
+
+    def setDataArray(self, arr):
+        self.dataArray = arr
 
     def draw(self):
         self.anim_pacman_current.draw()
+
+    def getColByX(self, coord):
+        return int(round(coord / 20))
+
+    def getRowByY(self, coord):
+        return {
+            0:   'one',
+            20:  'two',
+            40:  'three',
+            60:  'four',
+            80:  'five',
+            100: 'six',
+            120: 'seven',
+            140: 'eight',
+            160: 'nine',
+            180: 'ten',
+            200: 'eleven',
+            220: 'twelve',
+            240: 'thirteen',
+            260: 'fourteen',
+            280: 'fifteen',
+            300: 'sixteen',
+            320: 'seventeen',
+            340: 'eighteen',
+            360: 'nineteen',
+            380: 'twenty',
+            400: 'twentyone',
+            420: 'twentytwo',
+            440: 'twentythree',
+            460: 'twentyfour',
+            480: 'twentyfive',
+            500: 'twentysix',
+            520: 'twentyseven',
+            540: 'twentyeight'
+        }.get(round(coord), 'one')
+
+    def clash(self, pacmanX, pacmanY):
+        col = self.getColByX(pacmanX)
+        row = self.getRowByY(pacmanY)
+        elem = self.dataArray[row][col]
+        if elem == 0:
+            return False
+        else:
+            return True
 
     def move(self, symbol):
         from pyglet.window import key
@@ -45,6 +93,10 @@ class Pacman:
         if symbol == key.DOWN or symbol == key.MOTION_DOWN:
             self.anim_pacman_current = self.anim_pacman["down"]
             prev_y -= pacmanStep
+
+        # check clash
+        if self.clash(prev_x, prev_y):
+            return
 
         self.anim_pacman_current.x = prev_x
         self.anim_pacman_current.y = prev_y

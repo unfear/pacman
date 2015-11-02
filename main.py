@@ -67,6 +67,9 @@ class Maze:
         self.tilesArray = []
         self.batch = pyglet.graphics.Batch()
 
+    def getDataArray(self):
+        return self.dataArray
+
     def getXByPos(self, col):
         x = 20 * col
         return x
@@ -110,19 +113,19 @@ class Maze:
             for elem in arr:
                 if elem == 0:
                     self.tilesArray.append(pyglet.sprite.Sprite(tileBlankImg, self.getXByPos(count), self.getYByPos(line), batch=self.batch))
-                    count += 1
                 elif elem == 1:
                     self.tilesArray.append(pyglet.sprite.Sprite(tileImg, self.getXByPos(count), self.getYByPos(line), batch=self.batch))
-                    count += 1
                 else:
                     self.tilesArray.append(pyglet.sprite.Sprite(tileBlankImg, self.getXByPos(count), self.getYByPos(line), batch=self.batch))
-                    count += 1
+                count += 1
 
     def re_draw(self):
         self.batch.draw()
 
 maze = Maze()
 maze.draw()
+
+pacman.setDataArray(maze.getDataArray())
 
 
 @win.event
@@ -147,7 +150,7 @@ def update(dt):
         imgEnemySprite.x -= 2
     if enemyDirection == 'right':
         imgEnemySprite.x += 2
-    pacman.move(pacman.pacmanDirection)
+    # pacman.move(pacman.pacmanDirection)
 
 pyglet.clock.schedule_interval(update, 0.01)
 
