@@ -43,12 +43,13 @@ SCRIPT_PATH = sys.path[0]
 winWidth = 560
 winHeight = 560
 win = pyglet.window.Window(winWidth, winHeight)
-pyglet.gl.glClearColor(0.3, 0.1, 0.5, 1)
+pyglet.gl.glClearColor(0, 0, 0, 1)
 
 # TODO: move ghost to ghost.py
 imgEnemy = pyglet.image.load(os.path.join(SCRIPT_PATH, "ghost_red.png"))
-tileImg = pyglet.image.load(os.path.join(SCRIPT_PATH, "wall-straight-horiz.gif"))
-tileBlankImg = pyglet.image.load(os.path.join(SCRIPT_PATH, "blank.gif"))
+# tileImg = pyglet.image.load(os.path.join(SCRIPT_PATH, "wall-straight-horiz.gif"))
+tileImg = pyglet.image.load(os.path.join(SCRIPT_PATH, "wall.png"))
+tileBlankImg = pyglet.image.load(os.path.join(SCRIPT_PATH, "blank.png"))
 label = pyglet.text.Label('Crash', font_name='Times New Roman', font_size=36, x=win.width//2, y=win.height//2, anchor_x='center', anchor_y='center')
 
 imgEnemySprite = pyglet.sprite.Sprite(imgEnemy)

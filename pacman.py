@@ -3,9 +3,6 @@ from pyglet.window import key
 
 SCRIPT_PATH = sys.path[0]
 
-# state of pacman step
-pacmanStep = 4
-
 
 class Pacman:
     # state of pacman direction
@@ -24,6 +21,9 @@ class Pacman:
         self.anim_pacman_current.x = (winW - self.anim_pacman_current.width) / 2
         self.anim_pacman_current.y = 200 #(winH - self.anim_pacman_current.height) / 2
         self.dataArray = []
+        self.currentRow = 'eleven'
+        # state of pacman step
+        self.pacmanStep = 5
 
     def setDataArray(self, arr):
         self.dataArray = arr
@@ -64,11 +64,16 @@ class Pacman:
             500: 'twentysix',
             520: 'twentyseven',
             540: 'twentyeight'
-        }.get(round(coord), 'one')
+        }.get(round(coord), 'undefined')
 
     def clash(self, pacmanX, pacmanY):
         col = self.getColByX(pacmanX)
         row = self.getRowByY(pacmanY)
+        if row == 'undefined':
+            row = self.currentRow
+        else:
+            self.currentRow = row
+
         elem = self.dataArray[row][col]
         if elem == 0:
             return False
@@ -83,16 +88,16 @@ class Pacman:
 
         if symbol == key.LEFT or symbol == key.MOTION_LEFT:
             self.anim_pacman_current = self.anim_pacman["left"]
-            prev_x -= pacmanStep
+            prev_x -= self.pacmanStep
         if symbol == key.RIGHT or symbol == key.MOTION_RIGHT:
             self.anim_pacman_current = self.anim_pacman["right"]
-            prev_x += pacmanStep
+            prev_x += self.pacmanStep
         if symbol == key.UP or symbol == key.MOTION_UP:
             self.anim_pacman_current = self.anim_pacman["up"]
-            prev_y += pacmanStep
+            prev_y += self.pacmanStep
         if symbol == key.DOWN or symbol == key.MOTION_DOWN:
             self.anim_pacman_current = self.anim_pacman["down"]
-            prev_y -= pacmanStep
+            prev_y -= self.pacmanStep
 
         # check clash
         if self.clash(prev_x, prev_y):
