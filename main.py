@@ -9,10 +9,8 @@ winHeight = 560
 win = pyglet.window.Window(winWidth, winHeight)
 pyglet.gl.glClearColor(0, 0, 0, 1)
 
-label = pyglet.text.Label('Crash', font_name='Times New Roman', font_size=36, x=win.width//2, y=win.height//2, anchor_x='center', anchor_y='center')
-
 pacman = Pacman(win.width, win.height)
-ghost_1 = Ghost(win.width, win.height)
+ghost_1 = Ghost(win.width, win.height, pacman)
 
 maze = Maze()
 maze.draw()
@@ -31,12 +29,12 @@ def on_draw():
 @win.event
 def on_key_press(symbol, modifiers):
     # ... handle this event ...
-    pacman.move(symbol)
+    pacman.move(symbol, ghost_1)
 
 
 @win.event
 def on_text_motion(motion):
-    pacman.move(motion)
+    pacman.move(motion, ghost_1)
 
 
 pyglet.app.run()
