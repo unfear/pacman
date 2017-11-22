@@ -21,9 +21,9 @@ pacman.setDataArray(maze.getDataArray())
 @win.event
 def on_draw():
     win.clear()
+    maze.re_draw()
     pacman.draw()
     ghost_1.draw()
-    maze.re_draw()
 
 
 @win.event

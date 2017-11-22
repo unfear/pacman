@@ -2,6 +2,7 @@ import pyglet, os, sys, math
 
 SCRIPT_PATH = sys.path[0]
 
+
 class Ghost:
     def __init__(self, winW, winH, pacman):
         self.winW = winW

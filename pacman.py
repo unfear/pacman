@@ -1,6 +1,6 @@
 import pyglet, os, sys, math
 from pyglet.window import key
-
+# path to resources
 SCRIPT_PATH = sys.path[0]
 
 
@@ -116,10 +116,11 @@ class Pacman:
 
     def clashGhost(self, ghost):
         if( (ghost.getX() >= self.anim_pacman_current.x) and (ghost.getX() <= self.anim_pacman_current.x + 20) and ((ghost.getY() >= self.anim_pacman_current.y) and (ghost.getY() <= self.anim_pacman_current.y + 20))):
-            print "!!!!!!!CLASH CLASH CLASH CLASH CLASH!!!!!!!"
+            print "!!!!!!!CLASH CLASH CLASH CLASH CLASH clashGhost !!!!!!!"
 
+    # called from the ghosts
     def catched(self):
-        print "!!!!!!!<<<CLASH CLASH CLASH CLASH CLASH>>>!!!!!!!"
+        print "!!!!!!!<<<CLASH CLASH CLASH CLASH CLASH catched >>>!!!!!!!"
         self.gameOverLabel.draw()
 
     def move(self, symbol, ghost):

@@ -1,0 +1,20 @@
+[Bugs]
+1. Create GameManager class to control the game process e.g. clash pacman and ghosts
+2. Move the clash() method from pacman to the GameManager entity
+2.1. CollisionDetector class
+    https://gamedev.stackexchange.com/questions/43397/collision-detection-game-design-and-architecture
+    https://gamedev.stackexchange.com/questions/46745/what-is-the-best-way-to-check-lists-of-objects-that-collide
+    https://gamedev.stackexchange.com/questions/13004/where-should-collision-detection-logic-be-placed
+3. Remove the ghost argument from the pacman.move()
+4. Why there are a few clash(), catched() methods in the pacman class?
+5. Revise getRow/getCal approach. The binding a string to number looks like a shit
+6. Since clash() will be moved to GameManager class, the clashPacman can be removed from the ghost class
+7. Move to Python 3
+
+[Features]
+1. Add a stash to the pacman. It can carry some stuff (like cherry, strawberry in original game). Add some weapon,
+ perks (invisibility, speed booster)
+2. Support of gamepad.
+3. Primitive AI to the ghosts
+4. Coop mode. Support of 2 gamepads.
+5. Add story line
