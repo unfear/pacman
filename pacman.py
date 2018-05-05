@@ -24,7 +24,6 @@ class Pacman:
         self.currentRow = 'eleven'
         # state of pacman step
         self.pacmanStep = 5
-        self.gameOverLabel = pyglet.text.Label('GAME OVER', font_name='Times New Roman', font_size=36, x=10, y=10, anchor_x='center', anchor_y='center')
 
 
     def setDataArray(self, arr):
@@ -114,16 +113,12 @@ class Pacman:
         else:
             return True
 
-    def clashGhost(self, ghost):
-        if( (ghost.getX() >= self.anim_pacman_current.x) and (ghost.getX() <= self.anim_pacman_current.x + 20) and ((ghost.getY() >= self.anim_pacman_current.y) and (ghost.getY() <= self.anim_pacman_current.y + 20))):
-            print "!!!!!!!CLASH CLASH CLASH CLASH CLASH clashGhost !!!!!!!"
-
     # called from the ghosts
     def catched(self):
         print "!!!!!!!<<<CLASH CLASH CLASH CLASH CLASH catched >>>!!!!!!!"
-        self.gameOverLabel.draw()
 
-    def move(self, symbol, ghost):
+
+    def move(self, symbol):
         print "move()"
         from pyglet.window import key
         self.pacmanDirection = symbol
@@ -152,7 +147,6 @@ class Pacman:
             prev_y -= self.pacmanStep
 
         # check clash
-        # self.clashGhost(ghost)
         if self.clash(prev_x, prev_y, symbol):
             return
 
