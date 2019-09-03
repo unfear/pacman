@@ -66,6 +66,11 @@ def update(dt):
             pacman.catched()
             gameover = True
 
+        if controller.active:
+            direction = controller.getPress()
+            pacman.move(direction)
+
+
 pyglet.clock.schedule_interval(update, 0.01)
 
 pyglet.app.run()
