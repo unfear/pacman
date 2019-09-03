@@ -4,6 +4,7 @@ from maze import Maze
 from collisiondetector import CollisionDetector
 from pacman import Pacman
 from ghost import Ghost
+from gamepadController import GamepadController
 
 
 # Maze consist of 28x28 parts, so 1 part = 20px
@@ -11,6 +12,8 @@ winWidth = 560
 winHeight = 560
 win = pyglet.window.Window(winWidth, winHeight)
 pyglet.gl.glClearColor(0, 0, 0, 1)
+
+controller = GamepadController()
 
 pacman = Pacman(win.width, win.height)
 ghost_1 = Ghost(win.width, win.height)
@@ -41,8 +44,13 @@ def on_draw():
 @win.event
 def on_key_press(symbol, modifiers):
     # ... handle this event ...
-    pacman.move(symbol)
-
+    global gameover
+    if not gameover:
+        pacman.move(symbol)
+    else:
+        from pyglet.window import key
+        if symbol == key.R:
+            gameover = False
 
 @win.event
 def on_text_motion(motion):
@@ -50,12 +58,13 @@ def on_text_motion(motion):
 
 #GameLoop
 def update(dt):
-    ghost_1.update(dt)
-    ghost_2.update(dt)
-    if collision.checkCollision():
-        pacman.catched()
-        global gameover
-        gameover = True
+    global gameover
+    if not gameover:
+        ghost_1.update(dt)
+        ghost_2.update(dt)
+        if collision.checkCollision():
+            pacman.catched()
+            gameover = True
 
 pyglet.clock.schedule_interval(update, 0.01)
 

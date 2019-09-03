@@ -1,2 +1,2 @@
 # pacman
-pacman controling by gamepad
+pacman controlled by gamepad in coop mode.
